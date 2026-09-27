@@ -1,0 +1,29 @@
+services:
+  app:
+#    container_name: "question-service"
+    build: .
+    ports:
+      - "8084:8084"
+    networks:
+      - quizquestion-network
+
+  postgres:
+    image: postgres:latest
+#    container_name: question-service-postgres
+    environment:
+      POSTGRES_DB: questions
+      POSTGRES_USER: sibtain
+      POSTGRES_PASSWORD: sibtain@123
+    ports:
+      - "5433:5432"
+#    volumes:
+#      - postgres-quizquestion-data:/var/lib/postgresql/
+    networks:
+      - quizquestion-network
+
+networks:
+  quizquestion-network:
+    driver: bridge
+
+volumes:
+  postgres-quizquestion-data:
